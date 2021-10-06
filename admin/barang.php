@@ -6,8 +6,8 @@
 <br/>
 
 <?php 
-$periksa=mysql_query("select * from barang where jumlah <=3");
-while($q=mysql_fetch_array($periksa)){	
+$periksa=mysqli_query($conn, "select * from barang where jumlah <=3");
+while($q=mysqli_fetch_array($periksa)){	
 	if($q['jumlah']<=3){	
 		?>	
 		<script>
@@ -23,18 +23,15 @@ while($q=mysql_fetch_array($periksa)){
 ?>
 <?php 
 $per_hal=10;
-$jumlah_record=mysql_query("SELECT COUNT(*) from barang");
-$jum=mysql_result($jumlah_record, 0);
+$jumlah_record=mysqli_query($conn, "SELECT COUNT(*) from barang");
+//$jum=mysql_result($jumlah_record, 0);
 $halaman=ceil($jum / $per_hal);
 $page = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 $start = ($page - 1) * $per_hal;
 ?>
 <div class="col-md-12">
 	<table class="col-md-2">
-		<tr>
-			<td>Jumlah Record</td>		
-			<td><?php echo $jum; ?></td>
-		</tr>
+		
 		<tr>
 			<td>Jumlah Halaman</td>	
 			<td><?php echo $halaman; ?></td>
@@ -60,13 +57,13 @@ $start = ($page - 1) * $per_hal;
 	</tr>
 	<?php 
 	if(isset($_GET['cari'])){
-		$cari=mysql_real_escape_string($_GET['cari']);
-		$brg=mysql_query("select * from barang where nama like '$cari' or jenis like '$cari'");
+		$cari=mysqli_real_escape_string($conn, $_GET['cari']);
+		$brg=mysqli_query($conn, "select * from barang where nama like '$cari' or jenis like '$cari'");
 	}else{
-		$brg=mysql_query("select * from barang limit $start, $per_hal");
+		$brg=mysqli_query($conn, "select * from barang limit $start, $per_hal");
 	}
 	$no=1;
-	while($b=mysql_fetch_array($brg)){
+	while($b=mysqli_fetch_array($brg)){
 
 		?>
 		<tr>
@@ -88,8 +85,8 @@ $start = ($page - 1) * $per_hal;
 		<td>			
 		<?php 
 		
-			$x=mysql_query("select sum(modal) as total from barang");	
-			$xx=mysql_fetch_array($x);			
+			$x=mysqli_query($conn, "select sum(modal) as total from barang");	
+			$xx=mysqli_fetch_array($x);			
 			echo "<b> Rp.". number_format($xx['total']).",-</b>";		
 		?>
 		</td>

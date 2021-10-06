@@ -8,8 +8,8 @@
 		<select type="submit" name="tanggal" class="form-control" onchange="this.form.submit()">
 			<option>Pilih tanggal ..</option>
 			<?php 
-			$pil=mysql_query("select distinct tanggal from barang_laku order by tanggal desc");
-			while($p=mysql_fetch_array($pil)){
+			$pil=mysqli_query($conn, "select distinct tanggal from barang_laku order by tanggal desc");
+			while($p=mysqli_fetch_array($pil)){
 				?>
 				<option><?php echo $p['tanggal'] ?></option>
 				<?php
@@ -22,7 +22,7 @@
 <br/>
 <?php 
 if(isset($_GET['tanggal'])){
-	$tanggal=mysql_real_escape_string($_GET['tanggal']);
+	$tanggal=mysqli_real_escape_string($conn, $_GET['tanggal']);
 	$tg="lap_barang_laku.php?tanggal='$tanggal'";
 	?><a style="margin-bottom:10px" href="<?php echo $tg ?>" target="_blank" class="btn btn-default pull-right"><span class='glyphicon glyphicon-print'></span>  Cetak</a><?php
 }else{
@@ -49,13 +49,13 @@ if(isset($_GET['tanggal'])){
 	</tr>
 	<?php 
 	if(isset($_GET['tanggal'])){
-		$tanggal=mysql_real_escape_string($_GET['tanggal']);
-		$brg=mysql_query("select * from barang_laku where tanggal like '$tanggal' order by tanggal desc");
+		$tanggal=mysqli_real_escape_string($conn, $_GET['tanggal']);
+		$brg=mysqli_query($conn, "select * from barang_laku where tanggal like '$tanggal' order by tanggal desc");
 	}else{
-		$brg=mysql_query("select * from barang_laku order by tanggal desc");
+		$brg=mysqli_query($conn, "select * from barang_laku order by tanggal desc");
 	}
 	$no=1;
-	while($b=mysql_fetch_array($brg)){
+	while($b=mysqli_fetch_array($brg)){
 
 		?>
 		<tr>
@@ -79,9 +79,9 @@ if(isset($_GET['tanggal'])){
 		<td colspan="7">Total Pemasukan</td>
 		<?php 
 		if(isset($_GET['tanggal'])){
-			$tanggal=mysql_real_escape_string($_GET['tanggal']);
-			$x=mysql_query("select sum(total_harga) as total from barang_laku where tanggal='$tanggal'");	
-			$xx=mysql_fetch_array($x);			
+			$tanggal=mysqli_real_escape_string($conn, $conn, $_GET['tanggal']);
+			$x=mysqli_query($conn, "select sum(total_harga) as total from barang_laku where tanggal='$tanggal'");	
+			$xx=mysqli_fetch_array($x);			
 			echo "<td><b> Rp.". number_format($xx['total']).",-</b></td>";
 		}else{
 
@@ -93,9 +93,9 @@ if(isset($_GET['tanggal'])){
 		<td colspan="7">Total Laba</td>
 		<?php 
 		if(isset($_GET['tanggal'])){
-			$tanggal=mysql_real_escape_string($_GET['tanggal']);
-			$x=mysql_query("select sum(laba) as total from barang_laku where tanggal='$tanggal'");	
-			$xx=mysql_fetch_array($x);			
+			$tanggal=mysqli_real_escape_string($conn, $_GET['tanggal']);
+			$x=mysqli_query($conn, "select sum(laba) as total from barang_laku where tanggal='$tanggal'");	
+			$xx=mysqli_fetch_array($x);			
 			echo "<td><b> Rp.". number_format($xx['total']).",-</b></td>";
 		}else{
 
@@ -123,8 +123,8 @@ if(isset($_GET['tanggal'])){
 							<label>Nama Barang</label>								
 							<select class="form-control" name="nama">
 								<?php 
-								$brg=mysql_query("select * from barang");
-								while($b=mysql_fetch_array($brg)){
+								$brg=mysqli_query($conn, "select * from barang");
+								while($b=mysqli_fetch_array($brg)){
 									?>	
 									<option value="<?php echo $b['nama']; ?>"><?php echo $b['nama'] ?></option>
 									<?php 

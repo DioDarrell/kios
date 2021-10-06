@@ -8,7 +8,7 @@ $harga=$_POST['harga'];
 $jumlah=$_POST['jumlah'];
 $sisa=$_POST['jumlah'];
 
-mysql_query("insert into barang values('','$nama','$jenis','$suplier','$modal','$harga','$jumlah','$sisa')");
+mysqli_query($conn, "insert into barang values('','$nama','$jenis','$suplier','$modal','$harga','$jumlah','$sisa')");
 header("location:barang.php");
 
  ?>

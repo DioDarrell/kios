@@ -4,7 +4,7 @@ include 'admin/config.php';
 $uname=$_POST['uname'];
 $pass=$_POST['pass'];
 $pas=md5($pass);
-$query=mysqli_query($success, "select * from admin where uname='$uname' and pass='$pas'")or die(mysqli_connect_error());
+$query=mysqli_query($conn, "select * from admin where uname='$uname' and pass='$pas'")or die(mysqli_connect_error());
 if(mysqli_num_rows($query)==1){
 	$_SESSION['uname']=$uname;
 	header("location:admin/index.php");

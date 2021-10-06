@@ -6,11 +6,11 @@ include 'header.php';
 <a class="btn" href="barang.php"><span class="glyphicon glyphicon-arrow-left"></span>  Kembali</a>
 
 <?php
-$id_brg=mysql_real_escape_string($_GET['id']);
+$id_brg=mysqli_real_escape_string($conn, $_GET['id']);
 
 
-$det=mysql_query("select * from barang where id='$id_brg'")or die(mysql_error());
-while($d=mysql_fetch_array($det)){
+$det=mysqli_query($conn, "select * from barang where id='$id_brg'")or die(mysqli_connect_error());
+while($d=mysqli_fetch_array($det)){
 	?>					
 	<table class="table">
 		<tr>
