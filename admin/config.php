@@ -1,4 +1,4 @@
 <?php 
-mysql_connect("localhost","root","");
-mysql_select_db("malasngoding_kios");
+mysqli_connect("localhost","root","");
+mysqli_select_db($mysql, "malasngoding_kios");
 ?>
