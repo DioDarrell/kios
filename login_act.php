@@ -12,5 +12,5 @@ if(mysqli_num_rows($query)==1){
 	header("location:index.php?pesan=gagal")or die(mysqli_connect_error());
 	// mysql_error();
 }
-// echo $pas;
+// echo $pas; hasdasdasdsdfsfsd
  ?>
